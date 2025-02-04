@@ -1,0 +1,28 @@
+img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 80vh;
+    filter: brightness(0.3);
+}
+
+.main-content{
+    position:absolute;
+    top: 50%;
+    left: 3%;
+}
+
+.main-content h1{
+    font-size: 3rem;
+    font-weight: bolder;
+    color: whitesmoke;
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.3),
+        0 0 20px rgba(255,255,255,0.3),
+        0 0 30px rgba(255,255,255,0.3);
+}
+
+section.courses{
+    background-color: #effeff;
+    padding: 6vh;
+}

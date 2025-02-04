@@ -1,0 +1,26 @@
+<section>
+    <img src="assets/homepage_banner.png" alt="Homepage Banner" />
+
+    <div class="main-content">
+        <h1 class="mt-2">Explore Amazing <br> Content</h1>
+        <a href="" class="btn btn-primary btn-lg mt-2">Courses</a> &nbsp;
+        <a href="" class="btn btn-lg btn-light mt-2">Templates</a>
+    </div>
+</section>
+
+<section class="courses">
+    <div class="container">
+        <h1 class="text-center">All Courses</h1>
+    </div>
+
+    <div class="row mt-5">
+        <div class="row mt-3">
+            @for(course of courses; track $index){
+                <div class="col-lg-3">
+                    <app-courses [course] = "course"></app-courses>
+                </div>
+            }
+          </div>
+    </div>
+    
+</section>

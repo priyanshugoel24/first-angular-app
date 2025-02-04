@@ -1,0 +1,22 @@
+.box{
+    background-color: #fff;
+    padding: 2vh 4vh;
+    height: 45vh;
+}
+
+.box .course-image{
+    height: 25vh;
+    width: 100%;
+    background-color: #3b99a0;
+    background-size: 100%;
+}
+
+.box .course-image img{
+    height: 100%;
+    width: -webkit-fill-available;
+    object-fit: cover;
+}
+
+.box p{
+    font-size: 0.75rem;
+}

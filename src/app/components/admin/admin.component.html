@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="card-header">Add Course</div>
+  <div class="card-body">
+    <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter title"
+          id="title"
+          name="title"
+          #title="ngModel"
+          [(ngModel)]="model.title"
+          required
+        />
+
+        <div *ngIf="title.invalid && (title.dirty || title.touched)">
+          <small *ngIf="title.errors?.['required']" class="text-danger"
+            >Title is required</small
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label"
+          >Description</label
+        >
+        <textarea
+          class="form-control"
+          rows="3"
+          placeholder="Enter description"
+          id="description"
+          name="description"
+          #description="ngModel"
+          [(ngModel)]="model.description"
+          required
+        ></textarea>
+
+        <div *ngIf="description.invalid && (description.dirty || description.touched)">
+          <small *ngIf="description.errors?.['required']" class="text-danger">Description is required</small>
+        </div>
+      </div>
+      <div>
+        <label for="image">Choose an image:</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          accept="image/*"
+          [multiple]="false"
+          (change)="onFileSelected($event)"
+          ngModel
+          required
+        />
+
+        @if(cover) {
+        <div class="course-image" style="align-items : end">
+          <img [src]="cover" alt="" />
+        </div>
+        } @if(showError) {
+        <div class="text-danger">Image is required.</div>
+        }
+      </div>
+      <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      [ngClass]="{'btn-success': isSaved}"
+      [ngStyle]="{'color': isSaved ? 'black' : ''}"
+    >
+      {{isSaved ? 'Saved' : 'Save'}}
+    </button>
+    </form>
+  </div>
+</div>
+
+<div class="row mt-3">
+  @for(course of courses; track $index){
+    <div class="col-lg-3">
+      <app-courses [course] = "course"></app-courses>
+    </div>
+  } @empty {
+  <div class="text-center">No courses available</div>
+  }
+</div>

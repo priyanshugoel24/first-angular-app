@@ -20,3 +20,8 @@
 .box p{
     font-size: 0.75rem;
 }
+
+.course-image button{
+    position: absolute;
+    margin-left: -5vh;
+}

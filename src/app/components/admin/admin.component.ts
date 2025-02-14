@@ -1,8 +1,10 @@
 import { CommonModule, NgIf } from '@angular/common';
-import { Component, } from '@angular/core';
+import { Component, inject, } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CoursesComponent } from '../courses/courses.component';
 import { Strings } from '../../enums/strings.enum';
+import { Course } from '../../interfaces/course.interface';
+import { CourseService } from '../../services/course/course.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,21 +15,21 @@ import { Strings } from '../../enums/strings.enum';
 export class AdminComponent {
 
   model : any = {};
-  cover! : string;
+  cover! : string | null;
   showError :boolean = false;
   cover_file : any;
   isSaved : boolean = false;
-  courses : any[] = [];
+  courses : Course[] = [];
+  private courseService = inject(CourseService);
+  // ngOnInit(){
+  //   this.getCourses();
+  // }
 
-  ngOnInit(){
-    this.getCourses();
-  }
-
-  getCourses(){
-    const data = localStorage.getItem(Strings.STORAGE_KEY);
-    this.courses = data ? JSON.parse(data) : [];
-  }
-
+  // getCourses(){
+  //   const data = localStorage.getItem(Strings.STORAGE_KEY);
+  //   this.courses = data ? JSON.parse(data) : [];
+  // }
+  
   onSubmit(form: NgForm) {
     if (form.invalid || !this.cover) {
       console.log('form invalid');
@@ -40,7 +42,15 @@ export class AdminComponent {
 
     console.log(form.value);
 
-    this.saveCourse(form.value);
+    this.saveCourse(form);
+  }
+
+  clearForm(form : NgForm){
+    if(form){
+      form.resetForm();
+      this.cover = null;
+      this.cover_file = null;
+    }
   }
 
   onFileSelected(event: any) {
@@ -57,18 +67,33 @@ export class AdminComponent {
     }
   }
 
-  saveCourse(formValue : any){
-    console.log(formValue);
+  async saveCourse(form: NgForm){
+    try{
+      const formValue = form.value; 
+      console.log(formValue);
+  
+      const data : Course = {
+        ...formValue,
+        image: this.cover,
+        id: this.courses.length + 1,
+      }
+  
+      await this.courseService.addCourse(data);      
+  
+      this.clearForm(form);
 
-    const data = {
-      ...formValue,
-      image: this.cover,
+    } catch(e){
+      console.log(e);
     }
-    
-
-    this.courses = [...this.courses, data];
-    localStorage.setItem(Strings.STORAGE_KEY, JSON.stringify(this.courses));
   }
+
+  // deleteCourse(course : any){
+  //   this.courses = this.courses.filter(course_item => course_item.id != course.id);
+
+  //   localStorage.setItem(Strings.STORAGE_KEY, JSON.stringify(this.courses));
+
+  // }
+
 
 
 }

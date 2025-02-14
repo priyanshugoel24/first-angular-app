@@ -22,9 +22,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="description" class="form-label"
-          >Description</label
-        >
+        <label for="description" class="form-label">Description</label>
         <textarea
           class="form-control"
           rows="3"
@@ -36,8 +34,14 @@
           required
         ></textarea>
 
-        <div *ngIf="description.invalid && (description.dirty || description.touched)">
-          <small *ngIf="description.errors?.['required']" class="text-danger">Description is required</small>
+        <div
+          *ngIf="
+            description.invalid && (description.dirty || description.touched)
+          "
+        >
+          <small *ngIf="description.errors?.['required']" class="text-danger"
+            >Description is required</small
+          >
         </div>
       </div>
       <div>
@@ -54,7 +58,7 @@
         />
 
         @if(cover) {
-        <div class="course-image" style="align-items : end">
+        <div class="course-image" style="align-items: end">
           <img [src]="cover" alt="" />
         </div>
         } @if(showError) {
@@ -62,23 +66,25 @@
         }
       </div>
       <button
-      type="submit"
-      class="btn btn-primary btn-lg"
-      [ngClass]="{'btn-success': isSaved}"
-      [ngStyle]="{'color': isSaved ? 'black' : ''}"
-    >
-      {{isSaved ? 'Saved' : 'Save'}}
-    </button>
+        type="submit"
+        class="btn btn-primary btn-lg"
+        [ngClass]="{ 'btn-success': isSaved }"
+        [ngStyle]="{ color: isSaved ? 'black' : '' }"
+      >
+        {{ isSaved ? "Saved" : "Save" }}
+      </button>
     </form>
   </div>
 </div>
 
-<div class="row mt-3">
+<!-- <div class="row mt-3">
   @for(course of courses; track $index){
     <div class="col-lg-3">
-      <app-courses [course] = "course"></app-courses>
+      <app-courses [course] = "course" [isAdmin] = "true" (del) = "deleteCourse($event)"></app-courses>
     </div>
   } @empty {
   <div class="text-center">No courses available</div>
   }
-</div>
+</div> -->
+
+<app-courses [isAdmin]="true" ></app-courses>

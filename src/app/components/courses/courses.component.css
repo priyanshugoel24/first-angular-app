@@ -1,12 +1,28 @@
 .box{
     background-color: #fff;
     padding: 2vh 4vh;
-    height: 45vh;
+    margin-left: 30px;
+    margin-right: 30px;
+    height: 40vh;
+    width: auto;
+    box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+    transition : transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box:hover{
+    transform : translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2), 0 16px 32px rgba(0,0,0,0.2);
+}
+
+.courses{
+    margin-bottom: 50px;
 }
 
 .box .course-image{
     height: 25vh;
-    width: 100%;
+    width: auto;
     background-color: #3b99a0;
     background-size: 100%;
 }
@@ -21,7 +37,22 @@
     font-size: 0.75rem;
 }
 
+.box h5{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
 .course-image button{
     position: absolute;
     margin-left: -5vh;
+}
+
+.btn-delete{
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover{
+    background-color: var(--bs-danger);
+    border-color: var(--bs-danger);
+    color : white;
 }

@@ -26,3 +26,35 @@
 .footer .social-icons a:hover {
   color: #3b62a0 !important;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 3vh 5%;
+    text-align: center;
+  }
+
+  .footer h5 {
+    font-size: 1.2rem;
+  }
+
+  .footer .social-icons a {
+    font-size: 1.2rem;
+    margin: 0 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2vh 5%;
+  }
+
+  .footer h5 {
+    font-size: 1rem;
+  }
+
+  .footer .social-icons a {
+    font-size: 1.1rem;
+    margin: 0 6px;
+  }
+}

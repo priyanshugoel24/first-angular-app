@@ -1,12 +1,12 @@
-<div class="row mt-5">
+<div class="row mt-5 courses">
    @for(course of courses; track $index) { 
-    <div class="col-lg-4 mb-4">
+    <div class="col-lg-4 mb-4" @fadeIn>
   <div class="box">
     <div style="text-align: center" class="course-image">     
       <img [src]="course.image" alt="Courses Banner" />
 
       @if(isAdmin) {
-        <button class="btn btn-danger" (click)="deleteCourse(course)">
+        <button class="btn btn-delete px-4" (click)="deleteCourse(course)">
           <i class="bi bi-trash-fill"></i>
         </button>
         }

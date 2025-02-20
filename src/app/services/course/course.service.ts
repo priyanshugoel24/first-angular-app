@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CourseService {
 
-  private courses$ = new BehaviorSubject<Course[]>([]);
+  private readonly courses$ = new BehaviorSubject<Course[]>([]);
 
   get courses(){
     return this.courses$.asObservable();

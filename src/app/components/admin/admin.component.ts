@@ -2,9 +2,9 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, inject, } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CoursesComponent } from '../courses/courses.component';
-import { Strings } from '../../enums/strings.enum';
 import { Course } from '../../interfaces/course.interface';
 import { CourseService } from '../../services/course/course.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin',
@@ -20,7 +20,8 @@ export class AdminComponent {
   cover_file : any;
   isSaved : boolean = false;
   courses : Course[] = [];
-  private courseService = inject(CourseService);
+  private readonly courseService = inject(CourseService);
+  private readonly toastr = inject(ToastrService);
   // ngOnInit(){
   //   this.getCourses();
   // }
@@ -32,6 +33,7 @@ export class AdminComponent {
   
   onSubmit(form: NgForm) {
     if (form.invalid || !this.cover) {
+      this.toastr.error('Form is invalid');
       console.log('form invalid');
       form.control.markAllAsTouched();
       if (!this.cover) {
@@ -40,7 +42,7 @@ export class AdminComponent {
       return;
     }
 
-    console.log(form.value);
+    console.log(form.value);    
 
     this.saveCourse(form);
   }
@@ -68,7 +70,7 @@ export class AdminComponent {
   }
 
   async saveCourse(form: NgForm){
-    try{
+    try{     
       const formValue = form.value; 
       console.log(formValue);
   
@@ -79,10 +81,11 @@ export class AdminComponent {
       }
   
       await this.courseService.addCourse(data);      
-  
+      this.toastr.success('Course added successfully');
       this.clearForm(form);
 
     } catch(e){
+      this.toastr.error('An error occurred while adding course');
       console.log(e);
     }
   }
